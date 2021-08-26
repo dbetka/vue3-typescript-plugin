@@ -1,5 +1,5 @@
 {
-  "name": "vue3-typescript-plugin",
+  "name": "@dbetka/vue3-typescript-plugin",
   "version": "0.1.0",
   "description": "Template for plugin written in vue3 and typescript",
   "license": "MIT",
