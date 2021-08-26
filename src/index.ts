@@ -1,6 +1,11 @@
 import './style/index.scss'
 import Menu from './components/Menu.vue'
-import { HelloPlugin } from '@/types'
+import { App } from 'vue'
+
+export declare interface HelloPlugin {
+  sayHello(text: string): string;
+  install(app: App): void;
+}
 
 const hello: HelloPlugin = {
   sayHello (name) {
@@ -13,6 +18,5 @@ const hello: HelloPlugin = {
 
 export {
   Menu,
-  HelloPlugin,
   hello,
 }
