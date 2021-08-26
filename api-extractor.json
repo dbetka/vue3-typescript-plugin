@@ -1,22 +1,47 @@
 {
-  "mainEntryPointFilePath": "src/index.d.ts",
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+
+  "mainEntryPointFilePath": "./dist/src/index.d.ts",
+
   "apiReport": {
-    "enabled": false
+    "enabled": true,
+    "reportFolder": "<projectFolder>/temp/"
   },
+
   "docModel": {
-    "enabled": false
+    "enabled": true
   },
+
   "dtsRollup": {
     "enabled": true,
-    "untrimmedFilePath": "vue-typescript-plugin/dist/index.d.ts"
+    "untrimmedFilePath": "./dist/<unscopedPackageName>.d.ts"
   },
+
+  "tsdocMetadata": {
+    "enabled": false
+  },
+
   "messages": {
+    "compilerMessageReporting": {
+      "default": {
+        "logLevel": "warning"
+      }
+    },
+
     "extractorMessageReporting": {
       "default": {
-        "logLevel": "none"
+        "logLevel": "warning",
+        "addToApiReportFile": true
       },
-      "ae-forgotten-export": {
+
+      "ae-missing-release-tag": {
         "logLevel": "none"
+      }
+    },
+
+    "tsdocMessageReporting": {
+      "default": {
+        "logLevel": "warning"
       }
     }
   }

@@ -1,22 +1,18 @@
-import { App } from 'vue'
 import './style/index.scss'
 import Menu from './components/Menu.vue'
+import { HelloPlugin } from '@/types'
 
-
-export interface HelloModule {
-  sayHello (name: string): string;
+const hello: HelloPlugin = {
+  sayHello (name) {
+    return `Hello ${name}`
+  },
+  install (app) {
+    app.config.globalProperties.$hello = this
+  },
 }
 
-export const Component = Menu
-
-export default {
-  install (app: App): void {
-    const helloModule: HelloModule = {
-      sayHello (name) {
-        return `Hello ${name}`
-      }
-    }
-
-    app.config.globalProperties.$hello = helloModule
-  },
+export {
+  Menu,
+  HelloPlugin,
+  hello,
 }

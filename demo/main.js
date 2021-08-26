@@ -1,10 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
-import VueTypescriptPlugin, { Component } from '../src/index'
+import { hello } from '../src/index'
 
 createApp(App)
-  .use(VueTypescriptPlugin)
+  .use(hello)
   .mount('#app')
-
-console.log(Component)
