@@ -1,6 +1,6 @@
 {
   "name": "@dbetka/vue3-typescript-plugin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Template for plugin written in vue3 and typescript",
   "license": "MIT",
   "keywords": [
@@ -76,7 +76,7 @@
     "tslib": "^2.3.0",
     "typescript": "^4.3.4",
     "vite": "^2.3.8",
-    "vue": "^3.0.11",
+    "vue": "^3.2.6",
     "vue-float-menu": "^1.9.0"
   },
   "peerDependencies": {

@@ -1,7 +1,7 @@
-import { HelloModule } from '@/types'
+import { HelloPlugin } from '@/types'
 
 declare module '@vue/runtime-core' {
   export interface ComponentCustomProperties {
-    $hello: HelloModule
+    $hello: HelloPlugin
   }
 }
