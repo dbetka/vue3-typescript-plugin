@@ -1,6 +1,6 @@
 {
   "name": "@dbetka/vue3-typescript-plugin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Template for plugin written in vue3 and typescript",
   "license": "MIT",
   "keywords": [
