@@ -5,36 +5,39 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import vue from 'rollup-plugin-vue'
 import scss from 'rollup-plugin-scss'
+import chalk from 'chalk'
 import pkg from './package.json'
 
 const banner = `/*!
   * ${pkg.name} v${pkg.version}
-  * (c) ${new Date().getFullYear()} dbetka
-  * @license MIT
+  * (c) ${new Date().getFullYear()} ${pkg.author}
+  * @license ${pkg.license}
   */`
 
 // ensure TS checks only once for each build
 let hasTSChecked = false
 
+let styleIsGenerated = false
+
 const outputConfigs = {
   // each file name has the format: `dist/${pkg.name}.${format}.js`
   // format being a key of this object
-  'esm-bundler': {
-    file: pkg.module,
-    format: 'es',
-  },
   cjs: {
     file: pkg.main,
     format: 'cjs',
+  },
+  'esm-bundler': {
+    file: pkg.module,
+    format: 'es',
   },
   // global: {
   //   file: pkg.unpkg,
   //   format: 'iife',
   // },
-  esm: {
-    file: pkg.browser || pkg.module.replace('bundler', 'browser'),
-    format: 'es',
-  },
+  // esm: {
+  //   file: pkg.browser || pkg.module.replace('bundler', 'browser'),
+  //   format: 'es',
+  // },
 }
 
 const allFormats = Object.keys(outputConfigs)
@@ -57,7 +60,7 @@ export default packageConfigs
 
 function createConfig(format, output, plugins = []) {
   if (!output) {
-    console.log(require('chalk').yellow(`invalid format: "${format}"`))
+    console.log(chalk.yellow(`invalid format: "${format}"`))
     process.exit(1)
   }
 
@@ -98,6 +101,13 @@ function createConfig(format, output, plugins = []) {
   // during a single build.
   hasTSChecked = true
 
+  // generate styles only for first build
+  const scssOptions = {}
+  if (styleIsGenerated === false)
+    styleIsGenerated = true
+  else
+    scssOptions.output = false
+
   const external = [ 'vue' ]
   // if (!isGlobalBuild) {
   //   external.push('@vue/devtools-api')
@@ -111,7 +121,10 @@ function createConfig(format, output, plugins = []) {
     // used alone.
     external,
     plugins: [
-      scss(),
+      scss({
+        ...scssOptions,
+        outputStyle: 'compressed',
+      }),
       vue(),
       tsPlugin,
       createReplacePlugin(
